@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | DevOps Bootcamp</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .error-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+        }
+        
+        .error-content {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 4rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            color: #4a90e2;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .error-message {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .error-description {
+            font-size: 1.1rem;
+            color: #888;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .error-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .error-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.3);
+        }
+        
+        .error-btn.secondary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        
+        .error-illustration {
+            margin-bottom: 2rem;
+            font-size: 4rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .error-links {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .error-links h3 {
+            color: #4a90e2;
+            margin-bottom: 1rem;
+        }
+        
+        .error-links ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .error-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .error-links a:hover {
+            color: #4a90e2;
+        }
+        
+        @media (max-width: 768px) {
+            .error-content {
+                padding: 2rem;
+            }
+            
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .error-links ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-content">
+            <div class="error-illustration">🔍</div>
+            <div class="error-code">404</div>
+            <h1 class="error-message">Oops! Page Not Found</h1>
+            <p class="error-description">
+                The page you're looking for seems to have wandered off into the cloud. 
+                Don't worry, our DevOps team is on it! While they work on getting everything 
+                back in order, you can explore other parts of our showcase.
+            </p>
+            
+            <div class="error-actions">
+                <a href="/" class="error-btn">🏠 Go Home</a>
+                <a href="/health" class="error-btn secondary">🔧 Health Check</a>
+            </div>
+            
+            <div class="error-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/#about">About</a></li>
+                    <li><a href="/#skills">Skills</a></li>
+                    <li><a href="/#projects">Projects</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Log 404 errors for analytics
+        console.log('📊 404 Error logged:', {
+            url: window.location.href,
+            referrer: document.referrer,
+            timestamp: new Date().toISOString(),
+            userAgent: navigator.userAgent
+        });
+
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const illustration = document.querySelector('.error-illustration');
+            
+            // Change illustration on click
+            const illustrations = ['🔍', '🚀', '🛠️', '☁️', '🎯', '💻'];
+            let currentIndex = 0;
+            
+            illustration.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % illustrations.length;
+                this.textContent = illustrations[currentIndex];
+            });
+            
+            // Add keyboard shortcut to go home
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'h' && (e.ctrlKey || e.metaKey)) {
+                    e.preventDefault();
+                    window.location.href = '/';
+                }
+            });
+            
+            // Auto-suggest similar pages (mock implementation)
+            const currentPath = window.location.pathname;
+            if (currentPath.includes('about')) {
+                const suggestion = document.createElement('p');
+                suggestion.innerHTML = '💡 Did you mean <a href="/#about">About section</a>?';
+                suggestion.style.marginTop = '1rem';
+                suggestion.style.fontStyle = 'italic';
+                document.querySelector('.error-description').appendChild(suggestion);
+            }
+        });
+    </script>
+</body>
+</html>
